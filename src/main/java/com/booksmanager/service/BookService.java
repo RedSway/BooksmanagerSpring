@@ -1,6 +1,6 @@
-package booksmanager.service;
+package com.booksmanager.service;
 
-import booksmanager.model.Book;
+import com.booksmanager.model.Book;
 
 import java.util.List;
 

@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="booksmanager"/>
+    <context:component-scan base-package="com.booksmanager"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
@@ -35,7 +35,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
-                <value>bookmanager.model.Book</value>
+                <value>com.booksmanager.model.Book</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -48,11 +48,11 @@
     </bean>
 
     <!--BookDao and BookService beans-->
-    <bean id="bookDao" class="booksmanager.dao.impl.BookDaoImpl">
+    <bean id="bookDao" class="com.booksmanager.dao.impl.BookDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
-    <bean id="bookService" class="booksmanager.service.impl.BookServiceImpl">
+    <bean id="bookService" class="com.booksmanager.service.impl.BookServiceImpl">
         <property name="bookDao" ref="bookDao"/>
     </bean>
 

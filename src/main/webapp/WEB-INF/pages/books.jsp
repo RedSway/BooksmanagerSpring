@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -33,13 +35,76 @@
     </table>
 
 
-    <form action="<c:url value="/books/add"/>">
-        <label><input type="text" name="name"></label>Name<br>
-        <label><input type="text" name="author"></label>Author<br>
-        <label><input type="date" name="date"></label>Date<br>
-        <label><input type="text" name="price"></label>Price<br>
+    <c:url var="addAction" value="/books/add"/>
 
-        <input type="submit" value="add" name="add">
-    </form>
+    <form:form action="${addAction}" commandName="book">
+        <table>
+            <c:if test="${!empty book.name}">
+                <tr>
+                    <td>
+                        <form:label path="id">
+                            <spring:message text="ID"/>
+                        </form:label>
+                    </td>
+                    <td>
+                        <form:input path="id" readonly="true" size="8" disabled="true"/>
+                        <form:hidden path="id"/>
+                    </td>
+                </tr>
+            </c:if>
+            <tr>
+                <td>
+                    <form:label path="name">
+                        <spring:message text="Name"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="name"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:label path="author">
+                        <spring:message text="Author"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="author"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:label path="date">
+                        <spring:message text="Date"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="date"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:label path="price">
+                        <spring:message text="Price"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="price"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <c:if test="${!empty book.name}">
+                        <input type="submit"
+                               value="<spring:message text="Edit Book"/>"/>
+                    </c:if>
+                    <c:if test="${empty book.name}">
+                        <input type="submit"
+                               value="<spring:message text="Add Book"/>"/>
+                    </c:if>
+                </td>
+            </tr>
+        </table>
+    </form:form>
 </body>
 </html>

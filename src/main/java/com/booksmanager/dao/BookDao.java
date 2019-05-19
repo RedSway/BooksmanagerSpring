@@ -1,6 +1,6 @@
-package booksmanager.dao;
+package com.booksmanager.dao;
 
-import booksmanager.model.Book;
+import com.booksmanager.model.Book;
 
 import java.util.List;
 

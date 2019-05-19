@@ -1,6 +1,6 @@
-package booksmanager.utils;
+package com.booksmanager.utils;
 
-import booksmanager.model.Book;
+import com.booksmanager.model.Book;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

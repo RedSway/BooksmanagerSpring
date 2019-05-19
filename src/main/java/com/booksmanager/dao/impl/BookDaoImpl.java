@@ -1,13 +1,15 @@
-package booksmanager.dao.impl;
+package com.booksmanager.dao.impl;
 
-
-
-import booksmanager.dao.BookDao;
-import booksmanager.model.Book;
+import com.booksmanager.dao.BookDao;
+import com.booksmanager.model.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -25,26 +27,34 @@ public class BookDaoImpl implements BookDao{
 
     public void addBook(Book book) {
         Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         session.save(book);
+        transaction.commit();
         session.close();
     }
 
     public void deleteBook(int id) {
         Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         Book book = session.load(Book.class, id);
         session.delete(book);
+        transaction.commit();
         session.close();
     }
 
     public void updateBook(Book book) {
         Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         session.update(book);
+        transaction.commit();
         session.close();
     }
 
     @SuppressWarnings("unchecked")
     public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();
-        return (List<Book>) session.createQuery("FROM Book").list();
+        List<Book> bookList = (List<Book>) session.createQuery("FROM Book").list();
+        session.close();
+        return bookList;
     }
 }
