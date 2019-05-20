@@ -7,9 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -22,7 +19,12 @@ public class BookDaoImpl implements BookDao{
     }
 
     public Book getById(int id) {
-        return sessionFactory.openSession().get(Book.class, id);
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Book book = session.get(Book.class, id);
+        transaction.commit();
+        session.close();
+        return book;
     }
 
     public void addBook(Book book) {
@@ -53,7 +55,9 @@ public class BookDaoImpl implements BookDao{
     @SuppressWarnings("unchecked")
     public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();
-        List<Book> bookList = (List<Book>) session.createQuery("FROM Book").list();
+        Transaction transaction = session.beginTransaction();
+        List<Book> bookList = session.createQuery("FROM Book").list();
+        transaction.commit();
         session.close();
         return bookList;
     }

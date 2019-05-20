@@ -9,7 +9,7 @@
 <body>
     <table border="1" cellpadding="5" cellspacing="5" style="font-size: 24px">
         <tr>
-            <td>Id</td>
+            <td>ID</td>
             <td>Name</td>
             <td>Author</td>
             <td>Date</td>
@@ -34,7 +34,6 @@
         </c:forEach>
     </table>
 
-
     <c:url var="addAction" value="/books/add"/>
 
     <form:form action="${addAction}" commandName="book">
@@ -48,7 +47,7 @@
                     </td>
                     <td>
                         <form:input path="id" readonly="true" size="8" disabled="true"/>
-                        <form:hidden path="id"/>
+                        <%--<form:hidden path="id"/>--%>
                     </td>
                 </tr>
             </c:if>

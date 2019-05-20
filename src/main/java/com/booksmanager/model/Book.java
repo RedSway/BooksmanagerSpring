@@ -3,7 +3,6 @@ package com.booksmanager.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -14,6 +13,8 @@ public class Book {
     private int id;
     private String name;
     private String author;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date date;
     private float price;
 
