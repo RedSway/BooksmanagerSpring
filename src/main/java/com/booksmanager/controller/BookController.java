@@ -32,13 +32,7 @@ public class BookController {
 
     @RequestMapping(value = "/books/add", method = RequestMethod.POST)
     public String addBook(@ModelAttribute("book") Book book) {
-        if (book.getId() == 0) {
-            bookService.addBook(book);
-            System.out.println("Add book");
-        } else {
-            bookService.updateBook(book);
-            System.out.println("Update book");
-        }
+        bookService.addBook(book);
 
         return "redirect:/books";
     }
@@ -53,9 +47,16 @@ public class BookController {
     @RequestMapping("update/{id}")
     public String updateBook(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));
-        model.addAttribute("bookList", bookService.getAllBooks());
 
-        return "books";
+        return "update";
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String updateBook(@ModelAttribute("book") Book book, @PathVariable("id") int id) {
+        book.setId(id);
+        bookService.updateBook(book);
+
+        return "redirect:/books";
     }
 
 }
